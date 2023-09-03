@@ -1,0 +1,27 @@
+<%= form_with(model: cancellation) do |form| %>
+  <% if cancellation.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(cancellation.errors.count, "error") %> prohibited this cancellation from being saved:</h2>
+
+      <ul>
+        <% cancellation.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :reason, style: "display: block" %>
+    <%= form.text_area :reason %>
+  </div>
+
+  <div>
+    <%= form.label :cancelled_at, style: "display: block" %>
+    <%= form.datetime_field :cancelled_at %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

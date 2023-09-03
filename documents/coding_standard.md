@@ -1,0 +1,1 @@
+https://nimblehq.co/compass/development/code-conventions/ruby/rspec/

@@ -1,0 +1,14 @@
+<p style="color: green"><%= notice %></p>
+
+<h1>Cancellations</h1>
+
+<div id="cancellations">
+  <% @cancellations.each do |cancellation| %>
+    <%= render cancellation %>
+    <p>
+      <%= link_to "Show this cancellation", cancellation %>
+    </p>
+  <% end %>
+</div>
+
+<%= link_to "New cancellation", new_cancellation_path %>

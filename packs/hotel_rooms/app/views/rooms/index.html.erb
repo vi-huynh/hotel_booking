@@ -1,0 +1,25 @@
+<p style="color: green"><%= notice %></p>
+<h1>Create room</h1>
+<%= render "form", room: @room %>
+
+<h1>Listing hotels</h1>
+<div id="users">
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Room type</th>
+      <th scope="col">Room name</th>
+      <th scope="col">Rom number</th>
+      <th scope="col">Bathroom count</th>
+      <th scope="col">Bed count</th>
+      <th scope="col">Room price</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @rooms.each do |room| %>
+    <%= render room, hotel: @hotel %>
+  <% end %>
+  </tbody>
+</div>
+

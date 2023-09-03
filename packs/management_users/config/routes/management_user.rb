@@ -1,0 +1,1 @@
+resources :management_users

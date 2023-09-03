@@ -1,0 +1,42 @@
+<%= form_with(model: reservation) do |form| %>
+  <% if reservation.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(reservation.errors.count, "error") %> prohibited this reservation from being saved:</h2>
+
+      <ul>
+        <% reservation.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :rom_id, style: "display: block" %>
+    <%= form.number_field :rom_id %>
+  </div>
+
+  <div>
+    <%= form.label :check_in_date, style: "display: block" %>
+    <%= form.datetime_field :check_in_date %>
+  </div>
+
+  <div>
+    <%= form.label :check_out_date, style: "display: block" %>
+    <%= form.datetime_field :check_out_date %>
+  </div>
+
+  <div>
+    <%= form.label :guest_name, style: "display: block" %>
+    <%= form.text_field :guest_name %>
+  </div>
+
+  <div>
+    <%= form.label :guest_id, style: "display: block" %>
+    <%= form.number_field :guest_id %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

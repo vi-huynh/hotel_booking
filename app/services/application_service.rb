@@ -1,0 +1,2 @@
+class ApplicationService < Actor
+end

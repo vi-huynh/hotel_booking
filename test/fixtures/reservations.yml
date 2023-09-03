@@ -1,0 +1,29 @@
+# == Schema Information
+#
+# Table name: reservations
+#
+#  id             :bigint           not null, primary key
+#  check_in_date  :datetime
+#  check_out_date :datetime
+#  guest_count    :integer
+#  guest_name     :string
+#  status         :integer
+#  created_at     :datetime         not null
+#  updated_at     :datetime         not null
+#  guest_id       :integer
+#  rom_id         :integer
+#
+
+one:
+  rom_id: 1
+  check_in_date: 2023-08-30 04:24:32
+  check_out_date: 2023-08-30 04:24:32
+  guest_name: MyString
+  guest_id: 1
+
+two:
+  rom_id: 1
+  check_in_date: 2023-08-30 04:24:32
+  check_out_date: 2023-08-30 04:24:32
+  guest_name: MyString
+  guest_id: 1
