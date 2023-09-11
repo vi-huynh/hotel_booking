@@ -1,10 +1,20 @@
+<div class="row">
+    <ul class="timeline">
+    <li class="active-tl">Your Selection</li>
+    <li>Your Details</li>
+    <li>Final Step</li>
+  </ul>
+</div>
+
 <p style="color: green"><%= notice %></p>
+<div class='row'>
+  <div class='col-6'>
+    <h3> Your booking details </h3>
+    <%= render @reservation %>
+  </div>
 
-<%= render @reservation %>
-
-<div>
-  <%= link_to "Edit this reservation", edit_reservation_path(@reservation) %> |
-  <%= link_to "Back to reservations", reservations_path %>
-
-  <%= button_to "Destroy this reservation", @reservation, method: :delete %>
+  <div class='col-6'>
+    <h3> Enter your details </h3>
+    <%= render 'reservations/form_guest_info', reservation: @reservation %>
+  </div>
 </div>

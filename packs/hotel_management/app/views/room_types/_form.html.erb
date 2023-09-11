@@ -1,0 +1,27 @@
+<%= form_with(model: room_type, url: room_type.id ? hotel_room_type_path(@hotel, room_type) : hotel_room_types_path(@hotel)  ) do |form| %>
+  <% if room_type.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(room_type.errors.count, "error") %> prohibited this room_type from being saved:</h2>
+
+      <ul>
+        <% room_type.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div>
+    <%= form.label :name, style: "display: block" %>
+    <%= form.text_field :name %>
+  </div>
+
+  <div>
+    <%= form.label :price, style: "display: block" %>
+    <%= form.number_field :price %>
+  </div>
+
+  <div>
+    <%= form.submit %>
+  </div>
+<% end %>

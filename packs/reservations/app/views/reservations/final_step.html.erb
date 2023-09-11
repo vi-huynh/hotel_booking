@@ -1,0 +1,54 @@
+<div class="row">
+    <ul class="timeline">
+    <li class="active-tl">Your Selection</li>
+    <li  class="active-tl">Your Details</li>
+    <% if @reservation.booked? %>
+      <li class="active-tl">Final Step</li>
+    <% else %>
+      <li>Final Step</li>
+    <% end %>
+  </ul>
+</div>
+
+<p style="color: green"><%= notice %></p>
+<div class='row'>
+
+  <div class='col-6'>
+    <h3> Your booking details </h3>
+    <%= render @reservation %>
+  </div>
+
+  <div class='col-6'>
+    <h3> Your booking details </h3>
+    <p>
+      <strong></strong>
+      <%= @reservation.guest.first_name %>
+      <%= @reservation.guest.last_name %>
+    </p>
+
+    <p>
+      <strong>Phone:</strong>
+      <%= @reservation.guest.phone %>
+    </p>
+    <p>
+      <strong>Email:</strong>
+      <%= @reservation.guest.email %>
+    </p>
+
+    <p>
+      <strong>Age:</strong>
+      <%= @reservation.guest.age %>
+    </p>
+    <% if @reservation.booked? %>
+      <p>
+        <strong>Booking number:</strong>
+        <%= @reservation.booking_number %>
+      </p>
+    <% else %>
+    <%= render 'reservations/form_booking', reservation: @reservation %>
+    <% end %>
+  </div>
+  </div>
+</div>
+
+  

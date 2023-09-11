@@ -1,0 +1,42 @@
+<%= form_with(model: user) do |form| %>
+  <% if user.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(user.errors.count, "error") %> prohibited this user from being saved:</h2>
+
+      <ul>
+        <% user.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+
+  <div class="mb-3 col-4">
+    <%= form.label :username, class: "form-label" %>
+    <%= form.text_field :username, class: "form-control" %>
+  </div>
+
+  <div class="mb-3 col-4">
+    <%= form.label :email, class: "form-label" %>
+    <%= form.text_field :email, class: "form-control"%>
+  </div>
+
+  <div class="mb-3 col-4">
+    <%= form.label :password, class: "form-label" %>
+    <%= form.text_field :password, class: "form-control"%>
+  </div>
+
+  <div class="mb-3 col-4">
+    <%= form.label :password_confirmation, class: "form-label" %>
+    <%= form.text_field :password_confirmation, class: "form-control"%>
+  </div>
+
+  <% @roles.each do |role_name| %>
+      <%= form.label role_name, class: "form-label" %>
+      <%= form.radio_button :role, role_name, checked: user.has_role?(role_name) %>
+  <% end %>
+
+  <div>
+    <%= form.submit 'Save',  class: "btn btn-primary" %>
+  </div>
+<% end %>

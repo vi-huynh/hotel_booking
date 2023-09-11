@@ -1,0 +1,9 @@
+<tr>
+  <td> <%= room_type.name %></td>
+  <td> <%= room_type.price %></td>
+  <td> <%= room_type.rooms.count %></td>
+  <td> 
+  <%= link_to "Edit", edit_hotel_room_type_path(@hotel, room_type) %> 
+  <%= button_to "Destroy", hotel_room_type_path(@hotel, room_type), method: :delete %>
+  </td>
+</tr>

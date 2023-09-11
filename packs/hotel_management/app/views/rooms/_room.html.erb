@@ -1,0 +1,14 @@
+<tr>
+  <td> <%= room.room_type.name %></td>
+  <td> <%= room.rom_number %></td>
+  <td> <%= room.room_max_occupancy %></td>
+  <td> <%= room.max_adults_allowed %></td>
+  <td> <%= room.max_children_allowed %></td>
+  <td> <%= room.room_type.price %></td>
+  <td> <%= room.is_available %></td>
+
+  <td> 
+  <%= link_to "Edit", edit_hotel_room_path(@hotel, room) %> 
+  <%= button_to "Destroy", hotel_room_path(@hotel, room), method: :delete %>
+  </td>
+</tr>

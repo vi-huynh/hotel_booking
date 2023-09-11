@@ -1,0 +1,13 @@
+<tr>
+  <td> <%= hotel.name %></td>
+  <td> <%= hotel.address %></td>
+  <td> <%= hotel.contact %></td>
+  <td> <%= hotel.user.username %></td>
+  <td> 
+  <%= link_to "Edit", edit_hotel_path(hotel) %> 
+  <%= link_to "Add room type", hotel_room_types_path(hotel) %>
+  <%= link_to "Add rom", hotel_rooms_path(hotel) %>
+  <%= button_to "Destroy", hotels_path(hotel), method: :delete %>
+  
+  </td>
+</tr>

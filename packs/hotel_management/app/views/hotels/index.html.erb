@@ -1,0 +1,23 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render "form", hotel: @hotel %>
+
+<h1>Listing hotels</h1>
+<div id="users">
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Name</th>
+      <th scope="col">Email</th>
+      <th scope="col">Contact</th>
+      <th scope="col">Owner</th>
+
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @hotels.each do |hotel| %>
+    <%= render 'hotels/hotel', hotel: hotel %>
+  <% end %>
+  </tbody>
+</div>

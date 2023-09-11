@@ -10,51 +10,70 @@
 #
 # It's strongly recommended that you check this file into your version control system.
 
-ActiveRecord::Schema[7.0].define(version: 2023_08_30_070716) do
+ActiveRecord::Schema[7.0].define(version: 2023_09_11_062959) do
   # These are extensions that must be enabled in order to support this database
   enable_extension "plpgsql"
 
-  create_table "cancellations", force: :cascade do |t|
+  create_table "admins", force: :cascade do |t|
+    t.string "email", default: "", null: false
+    t.string "encrypted_password", default: "", null: false
+    t.string "reset_password_token"
+    t.datetime "reset_password_sent_at"
+    t.datetime "remember_created_at"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["email"], name: "index_admins_on_email", unique: true
+    t.index ["reset_password_token"], name: "index_admins_on_reset_password_token", unique: true
+  end
+
+  create_table "cancellations", id: false, force: :cascade do |t|
+    t.bigserial "cancellation_id"
+    t.bigint "reservation_id"
     t.text "reason"
     t.datetime "cancelled_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "customers", force: :cascade do |t|
-    t.string "name"
-    t.string "mobile"
+  create_table "guests", id: false, force: :cascade do |t|
+    t.bigserial "guest_id"
+    t.string "first_name"
+    t.string "last_name"
+    t.integer "age"
     t.string "email"
-    t.string "username"
-    t.string "address"
+    t.string "phone"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
   end
 
-  create_table "examples", force: :cascade do |t|
+  create_table "hotels", id: false, force: :cascade do |t|
+    t.bigserial "hotel_id"
     t.string "name"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "guests", force: :cascade do |t|
-    t.string "guest_name"
-    t.string "guest_phone_number"
-    t.string "guest_email"
-    t.string "guest_address"
-    t.datetime "created_at", null: false
-    t.datetime "updated_at", null: false
-  end
-
-  create_table "hotels", force: :cascade do |t|
-    t.string "hotel_name"
-    t.string "hotel_address"
-    t.string "hotel_contact"
-    t.string "hotel_email"
-    t.text "hotel_description"
+    t.string "address"
+    t.decimal "latitude", precision: 10, scale: 6
+    t.decimal "longitude", precision: 10, scale: 6
+    t.string "city"
+    t.string "state"
+    t.string "country"
+    t.string "contact"
+    t.string "phone"
+    t.string "email"
+    t.text "description"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
     t.integer "user_id"
+    t.string "slug"
+  end
+
+  create_table "inventories", force: :cascade do |t|
+    t.bigint "hotel_id"
+    t.bigint "room_type_id"
+    t.date "date"
+    t.integer "total_inventory"
+    t.integer "total_reserved"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
+    t.index ["hotel_id", "room_type_id", "date"], name: "index_inventories_on_hotel_id_and_room_type_id_and_date", unique: true
   end
 
   create_table "payments", force: :cascade do |t|
@@ -66,16 +85,18 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_30_070716) do
     t.datetime "updated_at", null: false
   end
 
-  create_table "reservations", force: :cascade do |t|
-    t.integer "rom_id"
-    t.integer "status"
+  create_table "reservations", id: false, force: :cascade do |t|
+    t.bigserial "reservation_id"
+    t.bigint "hotel_id"
+    t.integer "room_type_id"
+    t.bigint "guest_id"
     t.datetime "check_in_date"
     t.datetime "check_out_date"
-    t.string "guest_name"
-    t.integer "guest_count"
-    t.integer "guest_id"
+    t.integer "status"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
+    t.integer "number_room"
+    t.string "booking_number"
   end
 
   create_table "roles", force: :cascade do |t|
@@ -88,19 +109,29 @@ ActiveRecord::Schema[7.0].define(version: 2023_08_30_070716) do
     t.index ["resource_type", "resource_id"], name: "index_roles_on_resource"
   end
 
-  create_table "rooms", force: :cascade do |t|
-    t.string "room_name"
-    t.integer "rom_number"
-    t.integer "room_type"
-    t.decimal "room_price"
+  create_table "room_types", force: :cascade do |t|
+    t.string "name"
+    t.decimal "price"
     t.bigint "hotel_id"
-    t.integer "bed_count"
-    t.integer "bathroom_count"
-    t.text "room_description"
-    t.datetime "avaliable_at"
     t.datetime "created_at", null: false
     t.datetime "updated_at", null: false
-    t.index ["hotel_id"], name: "index_rooms_on_hotel_id"
+    t.index ["name", "hotel_id"], name: "index_room_types_on_name_and_hotel_id", unique: true
+  end
+
+  create_table "rooms", id: false, force: :cascade do |t|
+    t.bigserial "room_id"
+    t.bigint "room_type_id"
+    t.bigint "hotel_id"
+    t.boolean "is_available"
+    t.string "rom_number"
+    t.decimal "room_price"
+    t.integer "bed_count"
+    t.integer "room_max_occupancy"
+    t.integer "max_adults_allowed"
+    t.integer "max_children_allowed"
+    t.text "room_description"
+    t.datetime "created_at", null: false
+    t.datetime "updated_at", null: false
   end
 
   create_table "users", force: :cascade do |t|

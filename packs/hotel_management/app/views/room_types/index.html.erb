@@ -1,0 +1,26 @@
+<p style="color: green"><%= notice %></p>
+
+<%= render 'shared/hotel_info', hotel: @hotel %>
+
+<h3>Create room type</h3>
+<%= render "form", room_type: @room_type %>
+<%= link_to "Add rom", hotel_rooms_path(@hotel) %>
+
+<h3>Listing rom types</h3>
+<div id="users">
+  <table class="table">
+  <thead>
+    <tr>
+      <th scope="col">Type</th>
+      <th scope="col">Price</th>
+      <th scope="col">Totol rooms</th>
+      <th scope="col">Action</th>
+    </tr>
+  </thead>
+  <tbody>
+  <% @room_types.each do |room_type| %>
+    <%= render room_type, hotel: @hotel %>
+  <% end %>
+  </tbody>
+</div>
+

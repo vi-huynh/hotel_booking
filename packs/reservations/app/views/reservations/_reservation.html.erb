@@ -1,7 +1,12 @@
 <div id="<%= dom_id reservation %>">
   <p>
-    <strong>Rom:</strong>
-    <%= reservation.rom_id %>
+    <strong>Hotel:</strong>
+    <%= reservation.hotel.name %>
+  </p>
+
+  <p>
+    <strong>Rom type:</strong>
+    <%= reservation.room_type.name %>
   </p>
 
   <p>
@@ -15,13 +20,12 @@
   </p>
 
   <p>
-    <strong>Guest name:</strong>
-    <%= reservation.guest_name %>
+    <strong>Number room: </strong>
+    <%= reservation.number_room %>
   </p>
 
   <p>
-    <strong>Guest:</strong>
-    <%= reservation.guest_id %>
+    <strong> Total price: </strong>
+    <%= reservation.number_room * reservation.room_type.price %>
   </p>
-
 </div>

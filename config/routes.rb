@@ -1,12 +1,19 @@
 Rails.application.routes.draw do
-  root to: "home#index"
+  root to: "hotel_catalogs#index"
+  resources :inventories
 
   resources :payments
   resources :guests
-  devise_for :users
-  
-  draw(:management_user)
-  draw(:hotel_rooms)
-  draw(:reservations)
-  draw(:cancelations)
+  devise_for :users, path: 'users'
+  devise_for :admins, path: 'admins'
+  scope :admin do 
+    draw(:user_managment)
+    draw(:hotel_management)
+    draw(:cancelations)
+  end
+
+  scope :hotels do 
+    draw(:hotel_catalog)
+    draw(:reservations)
+  end 
 end

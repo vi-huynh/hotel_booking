@@ -1,0 +1,54 @@
+<%= form_with(model: room, url: room.id ? hotel_room_path(@hotel, room) : hotel_rooms_path(@hotel)) do |form| %>
+  <% if room.errors.any? %>
+    <div style="color: red">
+      <h2><%= pluralize(room.errors.count, "error") %> prohibited this room from being saved:</h2>
+
+      <ul>
+        <% room.errors.each do |error| %>
+          <li><%= error.full_message %></li>
+        <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div>
+    <%= form.label :room_type, style: "display: block" %>
+    <%= form.select :room_type_id, @room_types %>
+  </div>
+
+  <div>
+    <%= form.label :rom_number, style: "display: block" %>
+    <%= form.text_field :rom_number %>
+  </div>
+
+  <div>
+    <%= form.label :bed_count, style: "display: block" %>
+    <%= form.number_field :bed_count %>
+  </div>
+
+  <div>
+    <%= form.label :room_max_occupancy, style: "display: block" %>
+    <%= form.number_field :room_max_occupancy %>
+  </div>
+
+  <div>
+    <%= form.label :max_adults_allowed, style: "display: block" %>
+    <%= form.number_field :max_adults_allowed %>
+  </div>
+
+  <div>
+    <%= form.label :max_children_allowed, style: "display: block" %>
+    <%= form.number_field :max_children_allowed %>
+  </div>
+
+  <div>
+    <%= form.label :room_description, style: "display: block" %>
+    <%= form.text_area :room_description %>
+  </div>
+
+  <div>
+    <%= form.submit %> 
+  </div>
+  <div>
+  <%= link_to "Back to rooms type", hotel_room_types_path(@hotel)%>
+</div>
+<% end %>

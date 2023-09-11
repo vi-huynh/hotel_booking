@@ -1,0 +1,29 @@
+<%= form_with(url: "/hotels/#{@hotel.slug}", method: :get, authenticity_token: false) do |f| %>
+  <% if @search_form.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@search.errors.count, "error") %> prohibited this search from being saved:</h2>
+      <ul>
+      <% @search_form.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  <div class='row mb-3'>
+      <div class="form-group col-6">
+      <%= f.label "Checkin:" %>
+      <%= f.date_field :check_in_date, class: "form-control", value: @search_form.check_in_date %>
+      </div>
+
+    <div class="form-group col-6">
+    <%= f.label "Checkout:" %>
+    <%= f.date_field :check_out_date, class: "form-control", value: @search_form.check_out_date %>
+    </div>
+  </div>
+
+<div class='row mb-3'>
+  <div class="actions" ">
+    <%= f.submit 'Search', class: "btn btn-primary"%>
+  </div>
+</div>
+<% end %>

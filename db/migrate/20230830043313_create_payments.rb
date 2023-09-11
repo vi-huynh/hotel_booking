@@ -5,7 +5,7 @@ class CreatePayments < ActiveRecord::Migration[7.0]
       t.integer :payment_method
       t.decimal :amount
       t.datetime :payment_at
-
+      
       t.timestamps
     end
   end

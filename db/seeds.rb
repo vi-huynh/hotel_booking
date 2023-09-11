@@ -5,16 +5,21 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
+# Admin.create(email: 'supper_admin@gmail.com', password: 'password@123',password_confirmation: 'password@123')
 
-Role.create(name: :admin)
-Role.create(name: :client)
-user1 = User.create(username: 'Admin',
-								    email: 'admin@gmail.com',
-								    password: 'password1234',
-								    password_confirmation: 'password1234')
-user1.add_role(:admin)
-user2 = User.create(username: 'client',
-								    email: 'client@gmail.com',
-								    password: 'password1234',
-								    password_confirmation: 'password1234')
-user2.add_role(:client)
+# Role.create(name: :hotel_owner)
+# Role.create(name: :hotel_manager) 
+# Role.create(name: :guest)
+
+RoomType.find_each do |room_type|
+	today = DateTime.now
+	(0...365).to_a.each  do |i|
+		Inventory.create(
+			date:  today + i.days,
+			total_inventory: room_type.rooms.count,
+			total_reserved: 0, 
+			hotel_id: room_type.hotel_id, 
+			room_type_id: room_type.id
+		)
+	end
+end

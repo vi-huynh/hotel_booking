@@ -1,0 +1,72 @@
+<div class='container d-flex align-items-center justify-content-center'>
+  <div>
+    <h2>Create new hotel</h2>
+    <%= form_with(model: hotel) do |form| %>
+      <% if hotel.errors.any? %>
+        <div style="color: red">
+          <h2><%= pluralize(hotel.errors.count, "error") %> prohibited this hotel from being saved:</h2>
+
+          <ul>
+            <% hotel.errors.each do |error| %>
+              <li><%= error.full_message %></li>
+            <% end %>
+          </ul>
+        </div>
+      <% end %>
+
+      <div class='mb-3'>
+        <%= form.label :owner_hotel, class: "form-label" %>
+        <%= form.select :user_id, @user_owners, class: "form-control" %>
+      </div>
+
+      <div class='mb-3'>
+        <%= form.label :name, class: "form-label" %>
+        <%= form.text_field :name, class: "form-control" %>
+      </div>
+
+      <div class='mb-3'>
+        <%= form.label :email, class: "form-label" %>
+        <%= form.text_field :email, class: "form-control"%>
+      </div>
+
+      <div class='mb-3'>
+        <%= form.label :address, class: "form-label" %>
+        <%= form.text_field :address, class: "form-control"%>
+      </div>
+
+      <div class='mb-3'>
+        <%= form.label :city, class: "form-label" %>
+        <%= form.text_field :city, class: "form-control"%>
+      </div>
+
+      <div class='mb-3'>
+        <%= form.label :state, class: "form-label" %>
+        <%= form.text_field :state , class: "form-control"%>
+      </div>
+
+      <div class='mb-3'>
+        <%= form.label :country, class: "form-label" %>
+        <%= form.text_field :country, class: "form-control" %>
+      </div>
+
+      <div class='mb-3'>
+        <%= form.label :contact, class: "form-label" %>
+        <%= form.text_field :contact, class: "form-control" %>
+      </div>
+
+      <div class='mb-3'>
+        <%= form.label :phone, class: "form-label" %>
+        <%= form.text_field :phone, class: "form-control"%>
+      </div>
+
+      <div class='mb-3'>
+        <%= form.label :description, class: "form-label" %>
+        <%= form.text_area :description, class: "form-control" %>
+      </div>
+
+      <div class="actions mb-3">
+        <%= form.submit 'Save', class: "btn btn-primary"%>
+      </div>
+    <% end %>
+  </div>
+</div>
