@@ -1,0 +1,37 @@
+# # This file contains a list of dependencies that are not part of the long term plan for the
+# # 'packs/user_management' package.
+# # We should generally work to reduce this list over time.
+# #
+# # You can regenerate this file using the following command:
+# #
+# # bin/packwerk update-todo
+# ---
+# ".":
+#   "::Ability":
+#     violations:
+#     - dependency
+#     files:
+#     - packs/user_management/app/controllers/admin_controller.rb
+#   "::ApplicationRecord":
+#     violations:
+#     - dependency
+#     files:
+#     - packs/user_management/app/models/role.rb
+#     - packs/user_management/app/models/user.rb
+#   "::ApplicationService":
+#     violations:
+#     - dependency
+#     files:
+#     - packs/user_management/app/services/users/creator.rb
+#     - packs/user_management/app/services/users/updator.rb
+# packs/hotel_management:
+#   "::Hotel":
+#     violations:
+#     - dependency
+#     files:
+#     - packs/user_management/app/models/user.rb
+#   "::Room":
+#     violations:
+#     - dependency
+#     files:
+#     - packs/user_management/app/models/user.rb

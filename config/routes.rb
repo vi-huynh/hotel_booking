@@ -9,11 +9,13 @@ Rails.application.routes.draw do
   scope :admin do 
     draw(:user_managment)
     draw(:hotel_management)
-    draw(:cancelations)
   end
 
   scope :hotels do 
     draw(:hotel_catalog)
     draw(:reservations)
   end 
+
+  draw(:cancelations)
+
 end

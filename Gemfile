@@ -55,6 +55,9 @@ group :development, :test do
   gem "rspec-rails"
   gem "factory_bot_rails"
   gem "faker"
+  #gem 'graphwerk'
+  gem 'pocky'
+  gem 'packwerk-extensions'
 end
 
 group :development do

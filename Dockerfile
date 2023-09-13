@@ -20,7 +20,9 @@ RUN --mount=type=cache,target=/var/cache/apt \
     postgresql-client \
     libvips \
     curl \
-    nodejs
+    nodejs \
+    vim \
+    graphviz
 
 ENV LANG=C.UTF-8 \
   BUNDLE_JOBS=4 \

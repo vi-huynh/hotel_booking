@@ -1,0 +1,26 @@
+<%= form_with(url: cancellations_path, method: :get, authenticity_token: false) do |f| %>
+  <% if @search_form.errors.any? %>
+    <div id="error_explanation">
+      <h2><%= pluralize(@search.errors.count, "error") %> prohibited this search from being saved:</h2>
+      <ul>
+      <% @search_form.errors.full_messages.each do |message| %>
+        <li><%= message %></li>
+      <% end %>
+      </ul>
+    </div>
+  <% end %>
+  
+  <div class='row g-3'>
+    <div class="col-auto">
+      <%= f.text_field :booking_number, class: "form-control", value: @search_form.booking_number, placeholder: 'Booking number' %>
+    </div>
+    <div class="col-auto">
+      <%= f.text_field :guest_email, class: "form-control", value: @search_form.guest_email, placeholder: 'Email' %>
+    </div>
+
+    <div class="col-auto">
+      <%= f.submit 'Search', class: "btn btn-primary mb-3"%>
+    </div>
+  </div>
+    
+<% end %>

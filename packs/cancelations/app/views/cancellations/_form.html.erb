@@ -1,3 +1,35 @@
+<div id="<%= dom_id reservation %>">
+  <p>
+    <strong>Hotel:</strong>
+    <%= reservation.hotel.name %>
+  </p>
+
+  <p>
+    <strong>Rom type:</strong>
+    <%= reservation.room_type.name %>
+  </p>
+
+  <p>
+    <strong>Check in date:</strong>
+    <%= reservation.check_in_date %>
+  </p>
+
+  <p>
+    <strong>Check out date:</strong>
+    <%= reservation.check_out_date %>
+  </p>
+
+  <p>
+    <strong>Number room: </strong>
+    <%= reservation.number_room %>
+  </p>
+
+  <p>
+    <strong> Total price: </strong>
+    <%= reservation.number_room * reservation.room_type.price %>
+  </p>
+</div>
+
 <%= form_with(model: cancellation) do |form| %>
   <% if cancellation.errors.any? %>
     <div style="color: red">
@@ -10,15 +42,10 @@
       </ul>
     </div>
   <% end %>
-
+  <%= form.hidden_field :reservation_id %>
   <div>
     <%= form.label :reason, style: "display: block" %>
     <%= form.text_area :reason %>
-  </div>
-
-  <div>
-    <%= form.label :cancelled_at, style: "display: block" %>
-    <%= form.datetime_field :cancelled_at %>
   </div>
 
   <div>

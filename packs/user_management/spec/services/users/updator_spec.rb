@@ -1,4 +1,5 @@
 require 'rails_helper'
+require 'debug'
 
 RSpec.describe Users::Updator, type: :service do
   describe '#update' do
@@ -12,24 +13,16 @@ RSpec.describe Users::Updator, type: :service do
         }
       end
 
-      let(:user)  { 
-        user = FactoryBot.create(:user, email: 'email@gmail.com') 
-        user.add_role(:client)
-        user
-      }
+      let(:user)  { FactoryBot.create(:user, email: 'email@gmail.com') }
       
-
       it 'update username' do
         new_username = Faker::Name.name.parameterize
-        actor = Users::Updator.call(
+        actor = Users::Updator.result(
           user: user, 
-          username: new_username,
+          username: new_username
         )
         
-        binding.break  
-
-        user = user.reload 
-        expect(user.username).to eq(username_updated)
+        expect(actor.user.username).to eq(new_username)
       end
 
       it 'update password' do
@@ -38,47 +31,62 @@ RSpec.describe Users::Updator, type: :service do
         actor = Users::Updator.call(
           user: user, 
           password: new_password,
-          password_confirmation: new_password,
+          password_confirmation: new_password
         )
-        user = user.reload
-        expect(user.authenticate(new_password)).to eq(true)
+        expect(actor.user.valid_password?(new_password)).to eq(true)
       end
 
-      it 'update role client to admin' do
+      it 'update role to hotel_owner' do
         actor = Users::Updator.call(
           user: user, 
-          roles: 'admin'
+          role: 'hotel_owner'
         )
-        user = user.reload
-        expect(user.has_role?(:admin)).to eq(true)
+        expect(actor.user.has_role?(:hotel_owner)).to eq(true)
+      end
+
+      it 'update role to hotel_manager' do
+        actor = Users::Updator.call(
+          user: user, 
+          role: 'hotel_manager'
+        )
+        expect(actor.user.has_role?(:hotel_manager)).to eq(true)
       end
 
     end 
 
-    context 'when invalid' do 
-      let(:user)  { 
-        user = FactoryBot.create(:user, email: 'email@gmail.com') 
-        user.add_role(:client)
-        user
+    context 'when invalid email' do 
+      let(:user)  { FactoryBot.create(:user, email: 'email@gmail.com') } 
+      subject(:result)  {
+        Users::Updator.result(
+        user: user, 
+        email: 'abc123'
+        ) 
       }
-
-      it 'email invalid' do
-        new_username = Faker::Name.name.parameterize
-        actor = Users::Updator.result(
-          user: user, 
-          email: 'abc123',
-        )
-        expect(actor.sucess?).to eq(false)
-        
+      it '#failure' do
+        expect(result.failure?).to eq(true)
       end
 
-      it 'password invalid' do
-        actor = Users::Updator.result(
+      it 'not update email' do
+        expect(result.user.reload.email).to eq('email@gmail.com')
+      end
+    end
+
+    context 'when invalid password' do 
+      let(:user)  { FactoryBot.create(:user, email: 'email@gmail.com') } 
+      subject(:result)  {
+        Users::Updator.result(
           user: user, 
           password: 'abc123',
           password_confirmation: 'abc123',
-        )
-        expect(actor.sucess?).to eq(false)
+        ) 
+      }
+
+      it '#failure' do
+        expect(result.failure?).to eq(true)
+      end
+
+      it '#failure' do
+        expect(result.error).to eq('Failed update password')
       end
 
       it 'password not same password_confirmation' do
@@ -87,17 +95,20 @@ RSpec.describe Users::Updator, type: :service do
           password: 'abc123',
           password_confirmation: '123abc'
         )
-        expect(actor.sucess?).to eq(false)
+        expect(actor.failure?).to eq(true)
       end
+    end
+    
+    context 'when invalid role' do 
+      let(:user)  { FactoryBot.create(:user, email: 'email@gmail.com') } 
 
       it 'role invalid' do
         actor = Users::Updator.result(
           user: user, 
-          roles: 'abc'
+          role: 'abc'
         )
-        expect(actor.sucess?).to eq(false)
+        expect(actor.failure?).to eq(true)
       end
-
     end 
   end
 end

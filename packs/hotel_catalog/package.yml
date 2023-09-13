@@ -1,1 +1,7 @@
 enforce_dependencies: true
+enforce_privacy: true
+metadata:
+  engine: true
+dependencies:
+  - '.'
+  - 'packs/hotel_management'

@@ -223,6 +223,11 @@ GEM
       parser
       sorbet-runtime (>= 0.5.9914)
       zeitwerk (>= 2.6.1)
+    packwerk-extensions (0.1.7)
+      packwerk (>= 2.2.1)
+      railties (>= 6.0.0)
+      sorbet-runtime
+      zeitwerk
     parallel (1.23.0)
     parse_packwerk (0.20.0)
       sorbet-runtime
@@ -232,6 +237,8 @@ GEM
     pastel (0.8.0)
       tty-color (~> 0.5)
     pg (1.5.3)
+    pocky (2.9.0)
+      ruby-graphviz (~> 1)
     popper_js (2.11.8)
     public_suffix (5.0.3)
     puma (5.6.7)
@@ -321,6 +328,8 @@ GEM
       sorbet-runtime
     rubocop-sorbet (0.7.3)
       rubocop (>= 0.90.0)
+    ruby-graphviz (1.2.5)
+      rexml
     ruby-progressbar (1.13.0)
     rubyzip (2.3.2)
     sassc (2.4.0)
@@ -432,7 +441,9 @@ DEPENDENCIES
   importmap-rails
   jbuilder
   packs-rails
+  packwerk-extensions
   pg (~> 1.5)
+  pocky
   puma (~> 5.0)
   rails (~> 7.0.7, >= 7.0.7.2)
   rolify

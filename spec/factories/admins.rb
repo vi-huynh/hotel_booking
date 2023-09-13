@@ -18,6 +18,8 @@
 #
 FactoryBot.define do
   factory :admin do
-    
+    email { "supper_admin@gmail.com" }
+    password { "password@123" }
+    password_confirmation { "password@123" }
   end
 end

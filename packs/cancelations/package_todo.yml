@@ -1,0 +1,36 @@
+# This file contains a list of dependencies that are not part of the long term plan for the
+# 'packs/cancelations' package.
+# We should generally work to reduce this list over time.
+#
+# You can regenerate this file using the following command:
+#
+# bin/packwerk update-todo
+---
+".":
+  "::ApplicationController":
+    violations:
+    - dependency
+    files:
+    - packs/cancelations/app/controllers/cancellations_controller.rb
+  "::ApplicationRecord":
+    violations:
+    - dependency
+    files:
+    - packs/cancelations/app/models/cancellation.rb
+  "::ApplicationService":
+    violations:
+    - dependency
+    files:
+    - packs/cancelations/app/services/search_booking.rb
+  "::Guest":
+    violations:
+    - dependency
+    files:
+    - packs/cancelations/app/services/search_booking.rb
+packs/reservations:
+  "::Reservation":
+    violations:
+    - dependency
+    files:
+    - packs/cancelations/app/models/cancellation.rb
+    - packs/cancelations/app/services/search_booking.rb

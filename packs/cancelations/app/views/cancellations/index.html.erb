@@ -1,14 +1,9 @@
 <p style="color: green"><%= notice %></p>
 
-<h1>Cancellations</h1>
+<h1>Search bookings </h1>
+<%= render 'cancellations/form_search' %>
 
-<div id="cancellations">
-  <% @cancellations.each do |cancellation| %>
-    <%= render cancellation %>
-    <p>
-      <%= link_to "Show this cancellation", cancellation %>
-    </p>
-  <% end %>
-</div>
+<% if @reservation.present? %>
+  <%= render 'cancellations/form', { reservation: @reservation, cancellation: @cancellation } %>
+<% end %>
 
-<%= link_to "New cancellation", new_cancellation_path %>

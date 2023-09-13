@@ -16,7 +16,7 @@
 class Reservation < ApplicationRecord
   self.primary_key = 'reservation_id'
 
-  belongs_to :hotel 
+  # belongs_to :hotel 
   belongs_to :room_type 
   belongs_to :guest, optional: true 
 
@@ -26,9 +26,9 @@ class Reservation < ApplicationRecord
   validates :check_in_date, presence: true 
   validates :check_out_date, presence: true 
   validates :room_type_id, presence: true
+  
 
-  def inventories
-    Inventory.available(check_in_date, check_out_date)
-             .where(hotel_id: hotel_id, room_type_id: room_type_id)
+  def total_price 
+    room_type.price * number_room * ( check_out_date.to_date - check_in_date.to_date)
   end 
 end

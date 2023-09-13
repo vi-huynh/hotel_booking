@@ -4,11 +4,17 @@ module Reservations
     output :reservation 
 
     def call 
-      # fail!(error: 'Room is not available') if invalid_stock?
       # fail!(error: 'The reservation is invalid') unless valid?
+      inventories = InventoryRepository.available_for(
+        check_in_date: reservation.check_in_date,
+        check_out_date: reservation.check_out_date,
+        hotel_id: reservation.hotel_id,
+        room_type_id: reservation.room_type_id
+      )
+      fail!(error: 'Room is not available') if invalid_stock?(inventories)
 
       ActiveRecord::Base.transaction do 
-        update_inventory
+        update_inventory(inventories)
         update_status_to_reserved
         generate_booking_number
         send_booking_info_to_guest
@@ -20,16 +26,16 @@ module Reservations
 
     private 
 
-    def invalid_stock? 
-      reservation.inventories.any? {|x| x.total_inventory - x.total_reserved < 0 }
+    def invalid_stock?(inventories)
+      inventories.any? {|x| x.total_inventory - x.total_reserved < 0 }
     end 
 
-    def valid?
+    def valid_guest?
       reservation.guest.present? 
     end
 
-    def update_inventory
-      reservation.inventories.lock.each do |inventory|
+    def update_inventory(inventories)
+      inventories.lock.each do |inventory|
         inventory.update(total_reserved:  inventory.total_reserved + reservation.number_room)
       end
     end

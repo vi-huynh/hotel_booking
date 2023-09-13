@@ -3,7 +3,17 @@ class CancellationsController < ApplicationController
 
   # GET /cancellations or /cancellations.json
   def index
-    @cancellations = Cancellation.all
+    @search_form = SearchBookingForm.new(
+      booking_number: params[:booking_number], 
+      guest_email: params[:guest_email]
+    )
+
+    actor = SearchBooking.result(
+      search_form: @search_form
+    )
+    @reservation = actor.reservation
+    @cancellation = Cancellation.new(reservation: @reservation)
+
   end
 
   # GET /cancellations/1 or /cancellations/1.json

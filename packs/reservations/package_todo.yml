@@ -1,0 +1,47 @@
+# This file contains a list of dependencies that are not part of the long term plan for the
+# 'packs/reservations' package.
+# We should generally work to reduce this list over time.
+#
+# You can regenerate this file using the following command:
+#
+# bin/packwerk update-todo
+---
+".":
+  "::ApplicationController":
+    violations:
+    - dependency
+    files:
+    - packs/reservations/app/controllers/reservations_controller.rb
+  "::ApplicationRecord":
+    violations:
+    - dependency
+    files:
+    - packs/reservations/app/models/reservation.rb
+  "::ApplicationService":
+    violations:
+    - dependency
+    files:
+    - packs/reservations/app/services/reservations/booking.rb
+    - packs/reservations/app/services/reservations/update_guest_info.rb
+  "::Guest":
+    violations:
+    - dependency
+    files:
+    - packs/reservations/app/models/reservation.rb
+    - packs/reservations/app/services/reservations/update_guest_info.rb
+  "::Inventory":
+    violations:
+    - dependency
+    files:
+    - packs/reservations/app/models/reservation.rb
+packs/hotel_management:
+  "::Hotel":
+    violations:
+    - dependency
+    files:
+    - packs/reservations/app/models/reservation.rb
+  "::RoomType":
+    violations:
+    - dependency
+    files:
+    - packs/reservations/app/models/reservation.rb

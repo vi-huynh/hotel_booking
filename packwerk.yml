@@ -21,3 +21,9 @@
 
 # Where you want the cache to be stored (default below)
 # cache_directory: 'tmp/cache/packwerk'
+# architecture_layers:
+#   - packs/hotel_management
+require:
+  - packwerk-extensions
+
+

@@ -1,6 +1,6 @@
 class ReservationsController < ApplicationController
   before_action :set_reservation, only: %i[ show edit update destroy update_guest_info final_step reserved ]
-
+  before_action :set_hotel, only: %i[ show edit update destroy update_guest_info final_step reserved ]
   # GET /reservations or /reservations.json
   def index
     @reservations = Reservation.all
@@ -55,7 +55,6 @@ class ReservationsController < ApplicationController
       end
     end
   end
-   
 
   def final_step 
   end 
@@ -72,8 +71,8 @@ class ReservationsController < ApplicationController
         format.json { render json: @reservation.errors, status: :unprocessable_entity }
       end
     end
-  end 
-
+  end
+  
 
   # DELETE /reservations/1 or /reservations/1.json
   # def destroy
@@ -89,6 +88,10 @@ class ReservationsController < ApplicationController
     # Use callbacks to share common setup or constraints between actions.
     def set_reservation
       @reservation = Reservation.find(params[:id])
+    end
+
+    def set_hotel
+      @hotel = HotelRepository.find_id(@reservation.hotel_id)
     end
 
     # Only allow a list of trusted parameters through.

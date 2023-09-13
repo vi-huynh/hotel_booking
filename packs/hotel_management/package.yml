@@ -1,1 +1,11 @@
+# Turn on dependency checks for this package
 enforce_dependencies: true
+enforce_privacy: true
+metadata:
+  engine: true
+dependencies:
+  - "."
+  - packs/user_management
+  - packs/reservations
+  - packs/inventory
+

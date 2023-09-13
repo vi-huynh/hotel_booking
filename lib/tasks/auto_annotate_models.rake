@@ -6,9 +6,17 @@ if Rails.env.development?
   task :set_annotation_options do
     # You can override any of these by setting an environment variable of the
     # same name.
+    model_dir = %w(
+      app/models
+      packs/hotel_management/app/models
+      packs/inventory/app/models
+      packs/hotel_catalog/app/models
+      packs/inventory/app/models
+    )
+
     Annotate.set_defaults(
       'active_admin'                => 'false',
-      'additional_file_patterns'    => [],
+      'additional_file_patterns'    => [''],
       'routes'                      => 'false',
       'models'                      => 'true',
       'position_in_routes'          => 'before',
@@ -21,7 +29,7 @@ if Rails.env.development?
       'show_complete_foreign_keys'  => 'false',
       'show_indexes'                => 'true',
       'simple_indexes'              => 'false',
-      'model_dir'                   => 'app/models',
+      'model_dir'                   => model_dir.join(','),
       'root_dir'                    => '',
       'include_version'             => 'false',
       'require'                     => '',

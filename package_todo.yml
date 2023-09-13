@@ -1,0 +1,52 @@
+# This file contains a list of dependencies that are not part of the long term plan for the
+# '.' package.
+# We should generally work to reduce this list over time.
+#
+# You can regenerate this file using the following command:
+#
+# bin/packwerk update-todo
+# ---
+# packs/cancelations:
+#   "::Cancellation":
+#     violations:
+#     - dependency
+#     files:
+#     - test/controllers/cancellations_controller_test.rb
+# packs/hotel_management:
+#   "::Hotel":
+#     violations:
+#     - dependency
+#     files:
+#     - app/controllers/home_controller.rb
+#     - app/models/ability.rb
+#     - app/models/inventory.rb
+#     - test/controllers/hotels_controller_test.rb
+#   "::Room":
+#     violations:
+#     - dependency
+#     files:
+#     - app/models/ability.rb
+#     - test/controllers/rooms_controller_test.rb
+#   "::RoomType":
+#     violations:
+#     - dependency
+#     files:
+#     - app/models/inventory.rb
+#     - db/seeds.rb
+#     - spec/models/room_type_spec.rb
+# packs/reservations:
+#   "::Reservation":
+#     violations:
+#     - dependency
+#     files:
+#     - app/models/ability.rb
+#     - app/models/guest.rb
+#     - app/models/payment.rb
+#     - test/controllers/reservations_controller_test.rb
+# packs/user_management:
+#   "::User":
+#     violations:
+#     - dependency
+#     files:
+#     - app/models/ability.rb
+#     - test/controllers/users_controller_test.rb

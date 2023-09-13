@@ -1,3 +1,6 @@
+<%= render 'hotel_catalogs/form_search_hotel'%>
+
+<h3>Listing hotels </h3>
 <% @hotels.each do |hotel| %>
   <%= render 'hotel_catalogs/hotel', hotel: hotel %>
 <% end %>

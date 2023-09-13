@@ -2,10 +2,18 @@
 # Please validate the configuration using `packwerk validate` (for Rails applications) or running the auto generated
 # test case (for non-Rails projects). You can then use `packwerk check` to check your code.
 
-# Turn on dependency checks for this package
-enforce_dependencies: true
+# https://github.com/Shopify/packwerk/blob/main/USAGE.md#Defining-packages
 
-# A list of this package's dependencies
-# Note that packages in this list require their own `package.yml` file
-# dependencies:
-# - "packages/billing"
+# Types of boundary checks
+# Packwerk ships with dependency boundary checking only. Other checking support may be added by extension gems.
+
+# Enforcing dependency boundary
+# A package's dependency boundary is violated whenever it references a constant in some package that has not been declared as a dependency.
+
+# Specify enforce_dependencies: true to start enforcing the dependencies of a package. The intentional dependencies of the package are specified as a list under a dependencies: key.
+
+enforce_dependencies: true
+enforce_privacy: true
+dependencies:
+  - packs/user_management
+  - packs/reservations

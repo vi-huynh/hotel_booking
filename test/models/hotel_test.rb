@@ -2,15 +2,22 @@
 #
 # Table name: hotels
 #
-#  id                :bigint           not null, primary key
-#  hotel_address     :string
-#  hotel_contact     :string
-#  hotel_description :text
-#  hotel_email       :string
-#  hotel_name        :string
-#  created_at        :datetime         not null
-#  updated_at        :datetime         not null
-#  user_id           :integer
+#  address     :string
+#  city        :string
+#  contact     :string
+#  country     :string
+#  description :text
+#  email       :string
+#  latitude    :decimal(10, 6)
+#  longitude   :decimal(10, 6)
+#  name        :string
+#  phone       :string
+#  slug        :string
+#  state       :string
+#  created_at  :datetime         not null
+#  updated_at  :datetime         not null
+#  hotel_id    :bigint           primary key
+#  user_id     :integer
 #
 require "test_helper"
 
