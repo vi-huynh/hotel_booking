@@ -14,7 +14,9 @@
     <div class="col-8">
       <%= f.text_field :name, class: "form-control", value: @search_form.name, placeholder: 'Hotel name' %>
     </div>
+
     <div class="col-auto">
+      <p style="color: red"><%= @errors %></p>
       <%= f.submit 'Search', class: "btn btn-primary mb-3"%>
     </div>
   </div>

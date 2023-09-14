@@ -10,9 +10,14 @@
 #  hotel_id   :bigint
 #
 FactoryBot.define do
+  
   factory :room_type do
-    name { "MyString" }
-    price { "9.99" }
-    hotel_id { "" }
+    name { %w[Single Double].sample }
+    price { Faker::Commerce.price }
+    trait :with_room do 
+      after(:create) do |room_type|
+        FactoryBot.create(:room, hotel_id: room_type.hotel_id, room_type: room_type)
+      end 
+    end 
   end
 end

@@ -30,13 +30,14 @@ class Hotel < ApplicationRecord
   validates :name, presence: true
   validates :address, presence: true
   validates :user, presence: true
+  validates :slug, presence: true, uniqueness: true 
   
   resourcify
 
-  before_save :set_slug 
+  before_validation :set_slug 
   
   private 
   def set_slug 
-    self.slug = name.parameterize
+    self.slug ||= name.to_s.parameterize
   end
 end

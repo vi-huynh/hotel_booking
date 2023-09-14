@@ -17,7 +17,7 @@ class HotelRepository
     end
     
     def by_slug(slug)
-      Hotel.where('slug = ?', slug)
+      Hotel.where('slug = ?', slug).first
     end
   end
 end

@@ -3,8 +3,8 @@ class HotelCatalogsController < ApplicationController
 
   def index
     @search_form = SearchHotelForm.new(name: params[:name]) 
-    actor = HotelManagement::SearchHotel.result(name: @search_form.name)
-    @hotels = actor.hotels.presence || HotelRepository.all.limit(3)
+    actor = HotelManagement::SearchHotel.result(name: @search_form.name, page: params[:page])
+    @hotels = actor.hotels.presence || []
   end
 
   def show 
@@ -13,8 +13,14 @@ class HotelCatalogsController < ApplicationController
       check_out_date: params[:check_out_date],
       hotel: @hotel 
     )
-    actor = ::HotelCatalogs::Search.call(search_form: @search_form)
-    @room_types = actor.room_types 
+    actor = HotelManagement::SearchRoom.result(@search_form.to_h)
+    if actor.success?
+      @room_types = actor.room_types 
+    else
+      @room_types = []
+      @errors = actor.error
+    end
+
   end 
 
   private 

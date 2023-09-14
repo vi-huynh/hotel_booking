@@ -5,12 +5,17 @@
 #
 #   movies = Movie.create([{ name: "Star Wars" }, { name: "Lord of the Rings" }])
 #   Character.create(name: "Luke", movie: movies.first)
-# Admin.create(email: 'supper_admin@gmail.com', password: 'password@123',password_confirmation: 'password@123')
+Admin.create(email: 'supper_admin@gmail.com', password: 'password@123',password_confirmation: 'password@123')
 
-# Role.create(name: :hotel_owner)
-# Role.create(name: :hotel_manager) 
-# Role.create(name: :guest)
+Role.create(name: :hotel_owner)
+Role.create(name: :hotel_manager) 
+Role.create(name: :guest)
 
+user = FactoryBot.create(:user, email: 'hotel1_owner@gmail.com', password: 'password@123',password_confirmation: 'password@123')
+
+hotels = FactoryBot.create_list(:hotel, 20, :with_room_type, user_id: user.id)
+
+# Generate data	inventory in 1 year 
 RoomType.find_each do |room_type|
 	today = DateTime.now
 	(0...365).to_a.each  do |i|

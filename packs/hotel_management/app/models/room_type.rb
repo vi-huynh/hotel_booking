@@ -15,5 +15,5 @@ class RoomType < ApplicationRecord
   belongs_to :hotel, class_name: Hotel.to_s 
   has_many :rooms
   validates :name, presence: true, uniqueness: { scope: :hotel_id}
-  validates :price, presence: true
+  validates :price, presence: true, numericality: { greater_than: 0 }
 end

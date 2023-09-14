@@ -27,6 +27,10 @@ gem "stimulus-rails"
 # Build JSON APIs with ease [https://github.com/rails/jbuilder]
 gem "jbuilder"
 
+# UI gem 
+gem 'bootstrap', '~> 5.3.1'
+# gem 'jquery-rails'
+
 # Use Redis adapter to run Action Cable in production
 # gem "redis", "~> 4.0"
 
@@ -48,6 +52,7 @@ gem "bootsnap", require: false
 # Use Active Storage variants [https://guides.rubyonrails.org/active_storage_overview.html#transforming-images]
 # gem "image_processing", "~> 1.2"
 
+# Unit test 
 group :development, :test do
   # See https://guides.rubyonrails.org/debugging_rails_applications.html#debugging-with-the-debug-gem
   gem "debug", platforms: %i[ mri mingw x64_mingw ]
@@ -55,6 +60,16 @@ group :development, :test do
   gem "rspec-rails"
   gem "factory_bot_rails"
   gem "faker"
+  
+  gem 'rails-controller-testing'
+  gem 'simplecov', require: false
+  gem 'timecop'
+  gem 'guard-rspec', require: false
+  
+end
+
+# Document 
+group :development do
   #gem 'graphwerk'
   gem 'pocky'
   gem 'packwerk-extensions'
@@ -78,20 +93,17 @@ group :test do
   gem "capybara"
   gem "selenium-webdriver"
   gem "webdrivers"
+  # Library for stubbing and setting expectations on HTTP requests in Ruby.
+  gem "webmock"
 end
 
 gem 'packs-rails'
 
-# authentication and authorization gems
+# authentication and authorization
 gem 'devise'
 gem 'cancancan'
 gem 'rolify'
 
-# datatye in  ruby 
+# Code quality 
 gem 'virtus'
-
-# UI gem 
-gem 'bootstrap', '~> 5.3.1'
-# gem 'jquery-rails'
-
 gem 'service_actor'

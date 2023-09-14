@@ -16,4 +16,8 @@ class ApplicationController < ActionController::Base
     @current_ability ||= Ability.new(current_user)
   end
 
+  def layout_template
+    current_admin ? 'admin' : 'application'
+  end 
+
 end

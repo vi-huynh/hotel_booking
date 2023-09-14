@@ -5,3 +5,4 @@ metadata:
 dependencies:
   - '.'
   - 'packs/hotel_management'
+  - 'packs/inventory'
